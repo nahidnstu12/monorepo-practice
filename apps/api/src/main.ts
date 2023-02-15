@@ -16,11 +16,18 @@ app.get('/api', (req, res) => {
 });
 
 app.get('/api/todos', async (req, res) => {
-  res.json(await TodoService.getAll());
+  // console.log(req.query);
+  
+  res.json(await TodoService.getAll(req.query));
 });
 
 app.post('/api/todos', async (req, res) => {
   res.json(await TodoService.create(req.body));
+});
+
+app.patch('/api/todos/:id', async (req, res) => {
+  console.log(req);
+  res.json(await TodoService.edit(req.params.id, req.body));
 });
 
 app.delete('/api/todos/:id', async (req, res) => {
